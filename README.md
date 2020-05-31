@@ -23,7 +23,7 @@ Ruoyi-Cloud-extend项目是基于[RuoYi-Cloud](https://gitee.com/y_project/RuoYi
 
 已经扩展的功能:
 
-1. **直接写入到项目**
+1. **直接写入到项目**  ([注意事项](./README/writetosrc.md))
 
    ![image-20200531155819783](./README/writesrc.png)
 
