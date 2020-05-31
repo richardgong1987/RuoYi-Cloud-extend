@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { getToken } from '@/utils/auth'
+import {Message} from "element-ui";
 
 const mimeMap = {
   xlsx: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
@@ -16,6 +17,17 @@ export function downLoadZip(str, filename) {
     headers: { 'Authorization': 'Bearer ' + getToken() }
   }).then(res => {
     resolveBlob(res, mimeMap.zip)
+  })
+}
+export function batchGenCodewrite(str, filename) {
+  var url = baseUrl + str
+  axios({
+    method: 'get',
+    url: url,
+    responseType: 'blob',
+    headers: { 'Authorization': 'Bearer ' + getToken() }
+  }).then(res => {
+    Message.success({message:"操作成功"})
   })
 }
 /**

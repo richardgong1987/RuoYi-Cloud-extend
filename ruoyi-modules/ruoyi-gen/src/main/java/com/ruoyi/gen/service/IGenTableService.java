@@ -88,7 +88,7 @@ public interface IGenTableService
      * @param tableNames 表数组
      * @return 数据
      */
-    public byte[] generatorCode(String[] tableNames);
+    public byte[] generatorCode(String[] tableNames,boolean isInsertproject);
 
     /**
      * 修改保存参数校验

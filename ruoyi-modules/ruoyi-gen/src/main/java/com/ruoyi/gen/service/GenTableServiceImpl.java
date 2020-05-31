@@ -1,8 +1,12 @@
 package com.ruoyi.gen.service;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,10 +34,12 @@ import com.ruoyi.gen.mapper.GenTableMapper;
 import com.ruoyi.gen.util.GenUtils;
 import com.ruoyi.gen.util.VelocityInitializer;
 import com.ruoyi.gen.util.VelocityUtils;
+import org.springframework.util.ClassUtils;
+import org.springframework.util.ResourceUtils;
 
 /**
  * 业务 服务层实现
- * 
+ *
  * @author ruoyi
  */
 @Service
@@ -49,7 +55,7 @@ public class GenTableServiceImpl implements IGenTableService
 
     /**
      * 查询业务信息
-     * 
+     *
      * @param id 业务ID
      * @return 业务信息
      */
@@ -63,7 +69,7 @@ public class GenTableServiceImpl implements IGenTableService
 
     /**
      * 查询业务列表
-     * 
+     *
      * @param genTable 业务信息
      * @return 业务集合
      */
@@ -75,7 +81,7 @@ public class GenTableServiceImpl implements IGenTableService
 
     /**
      * 查询据库列表
-     * 
+     *
      * @param genTable 业务信息
      * @return 数据库表集合
      */
@@ -86,7 +92,7 @@ public class GenTableServiceImpl implements IGenTableService
 
     /**
      * 查询据库列表
-     * 
+     *
      * @param tableNames 表名称组
      * @return 数据库表集合
      */
@@ -97,7 +103,7 @@ public class GenTableServiceImpl implements IGenTableService
 
     /**
      * 修改业务
-     * 
+     *
      * @param genTable 业务信息
      * @return 结果
      */
@@ -119,7 +125,7 @@ public class GenTableServiceImpl implements IGenTableService
 
     /**
      * 删除业务对象
-     * 
+     *
      * @param ids 需要删除的数据ID
      * @return 结果
      */
@@ -133,7 +139,7 @@ public class GenTableServiceImpl implements IGenTableService
 
     /**
      * 导入表结构
-     * 
+     *
      * @param tableList 导入表列表
      */
     @Override
@@ -168,7 +174,7 @@ public class GenTableServiceImpl implements IGenTableService
 
     /**
      * 预览代码
-     * 
+     *
      * @param tableId 表编号
      * @return 预览数据列表
      */
@@ -199,7 +205,7 @@ public class GenTableServiceImpl implements IGenTableService
 
     /**
      * 生成代码
-     * 
+     *
      * @param tableName 表名称
      * @return 数据
      */
@@ -208,25 +214,25 @@ public class GenTableServiceImpl implements IGenTableService
     {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         ZipOutputStream zip = new ZipOutputStream(outputStream);
-        generatorCode(tableName, zip);
+        generatorCode(tableName, zip,false);
         IOUtils.closeQuietly(zip);
         return outputStream.toByteArray();
     }
 
     /**
      * 批量生成代码
-     * 
+     *
      * @param tableNames 表数组
      * @return 数据
      */
     @Override
-    public byte[] generatorCode(String[] tableNames)
+    public byte[] generatorCode(String[] tableNames,boolean isInsertproject)
     {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         ZipOutputStream zip = new ZipOutputStream(outputStream);
         for (String tableName : tableNames)
         {
-            generatorCode(tableName, zip);
+            generatorCode(tableName, zip, isInsertproject);
         }
         IOUtils.closeQuietly(zip);
         return outputStream.toByteArray();
@@ -235,7 +241,7 @@ public class GenTableServiceImpl implements IGenTableService
     /**
      * 查询表信息并生成代码
      */
-    private void generatorCode(String tableName, ZipOutputStream zip)
+    private void generatorCode(String tableName, ZipOutputStream zip,boolean isInsertproject)
     {
         // 查询表信息
         GenTable table = genTableMapper.selectGenTableByName(tableName);
@@ -257,8 +263,12 @@ public class GenTableServiceImpl implements IGenTableService
             tpl.merge(context, sw);
             try
             {
+                String fileName = VelocityUtils.getFileName(template, table);
+                if (isInsertproject) {
+                    writeToSrc(sw, fileName);
+                }
                 // 添加到zip
-                zip.putNextEntry(new ZipEntry(VelocityUtils.getFileName(template, table)));
+                zip.putNextEntry(new ZipEntry(fileName));
                 IOUtils.write(sw.toString(), zip, Constants.UTF8);
                 IOUtils.closeQuietly(sw);
 				zip.flush();
@@ -272,8 +282,41 @@ public class GenTableServiceImpl implements IGenTableService
     }
 
     /**
+     * 写进源码
+     * @param sw
+     * @param fileName
+     * @throws IOException
+     */
+    private void writeToSrc(StringWriter sw, String fileName) throws IOException {
+        boolean isjava = fileName.startsWith("main");
+        boolean isvue = fileName.startsWith("vue");
+        String userdir = System.getProperty("user.dir");
+        if(isjava){
+            String path = userdir +"/ruoyi-modules/ruoyi-system/src/";
+            createCodeFiles(sw, fileName, path);
+        } else if(isvue){
+            String path = userdir +"/ruoyi-ui/src/";
+            createCodeFiles(sw, fileName, path);
+        }
+    }
+
+    /**
+     * 批量写文件操作
+     * @param sw
+     * @param fileName
+     * @param path
+     * @throws IOException
+     */
+    private void createCodeFiles(StringWriter sw, String fileName, String path) throws IOException {
+        String fileAndDictory = path + fileName;
+        Path dictory = Paths.get(fileAndDictory);
+        Files.createDirectories(dictory.getParent());
+        Files.write(dictory, sw.toString().getBytes());
+    }
+
+    /**
      * 修改保存参数校验
-     * 
+     *
      * @param genTable 业务信息
      */
     public void validateEdit(GenTable genTable)
@@ -299,7 +342,7 @@ public class GenTableServiceImpl implements IGenTableService
 
     /**
      * 设置主键列信息
-     * 
+     *
      * @param genTable 业务表信息
      * @param columns 业务字段列表
      */
@@ -321,7 +364,7 @@ public class GenTableServiceImpl implements IGenTableService
 
     /**
      * 设置代码生成其他选项值
-     * 
+     *
      * @param genTable 设置后的生成对象
      */
     public void setTableFromOptions(GenTable genTable)

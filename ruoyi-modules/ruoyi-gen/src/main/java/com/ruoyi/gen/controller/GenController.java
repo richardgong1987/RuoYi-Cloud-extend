@@ -1,6 +1,7 @@
 package com.ruoyi.gen.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -168,8 +169,20 @@ public class GenController extends BaseController
     public void batchGenCode(HttpServletResponse response, String tables) throws IOException
     {
         String[] tableNames = Convert.toStrArray(tables);
-        byte[] data = genTableService.generatorCode(tableNames);
+        byte[] data = genTableService.generatorCode(tableNames,false);
         genCode(response, data);
+    }
+    /**
+     * 批量生成代码
+     */
+    @PreAuthorize("@ss.hasPermi('tool:gen:code')")
+    @Log(title = "代码生成", businessType = BusinessType.GENCODE)
+    @GetMapping("/batchGenCodewrite")
+    public AjaxResult batchGenCodeWrite(String tables) throws IOException
+    {
+        String[] tableNames = Convert.toStrArray(tables);
+        genTableService.generatorCode(tableNames,true);
+        return AjaxResult.success();
     }
 
     /**
