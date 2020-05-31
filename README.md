@@ -1,13 +1,43 @@
 ## 平台简介
 
+Ruoyi-Cloud-extend项目是基于[RuoYi-Cloud](https://gitee.com/y_project/RuoYi-Cloud.git)
+
+本项目出现的原因:
+
+1. **系统工具->代码生成**,原版本的代码生成 是需要点击下载,然后,我们再复制到项目里,这样其实并不好用,也容易出错,在实际生产中这样挺费时间的,所以,萌生一个想法就是:能不能点击**直接写入到项目**,就直接生成到项目中,而不需要我们自己手动操作. 此想法是受**[jhipster](https://www.jhipster.tech/)** 启发. 
+
+2. **系统管理->菜单管理** 原版本的菜单管理 ,我个人觉得也并不好用. 在实现项目开发中,管理菜单是比较麻烦的事情.经常会遇到如下问题:
+
+   - 菜单增量发布时,更新sql. 在实际生产中,如果迭代更新时.一般只允许增量更新新增加的菜单 
+
+   - 菜单按钮批量生成. 在实际生产中. 经常会有批量生成菜单按钮. 而不是一个个的手动操作.这种效率很低 
+   - 固定菜单id. 在实际生产中菜单id是不可以随意改变的.需要一个机制去维护菜单id
+
+   
+
+3. docker配置文件的生成功能空缺. 在实际开发中.我们经常需要对项目进行容器化, 集群部署等等. 这种工作比较麻烦. 如果能有一个生成docker配置的工具会更好,也比较利于学习
+
+4. ...
+
+   
+
+已经扩展的功能:
+
+1. **直接写入到项目**
+
+   本项目连续开发中..
+
+
+
 * 采用前后端分离的模式，微服务版本前端(基于 [RuoYi-Vue](https://gitee.com/y_project/RuoYi-Vue))。
 * 后端采用Spring Boot、Spring Cloud & Alibaba。
 * 注册中心、配置中心选型Nacos，为权限认证使用OAuth2。
-* 友情链接 [wind/ruoyi-cloud](https://gitee.com/zhangmrit/ruoyi-cloud) Ant-Design-Vue版本。
-* 如需不分离应用，请移步 [RuoYi](https://gitee.com/y_project/RuoYi)，如需分离应用，请移步 [RuoYi-Vue](https://gitee.com/y_project/RuoYi-Vue)
-* 阿里云优惠券：[点我进入](https://www.aliyun.com/minisite/goods?userCode=brki8iof&share_source=copy_link)，腾讯云优惠券：[点我领取](https://cloud.tencent.com/redirect.php?redirect=1025&cps_key=198c8df2ed259157187173bc7f4f32fd&from=console)&nbsp;&nbsp;
+
+  
 
 ## 感谢
+
+- [RuoYi-Cloud](https://gitee.com/y_project/RuoYi-Cloud.git)
 
 - [pig-cloud](https://gitee.com/log4j/pig)
 - [ruoyi-cloud-design](https://gitee.com/zhangmrit/ruoyi-cloud)
@@ -107,6 +137,6 @@ com.ruoyi
 </table>
 
 
-## 若依微服务交流群
+## 本项目交流联系方式
 
-QQ群： [![加入QQ群](https://img.shields.io/badge/42799195-blue.svg)](https://jq.qq.com/?_wv=1027&k=yqInfq0S) 点击按钮入群。
+QQ群： 909253305。 微信:live1520
