@@ -25,7 +25,9 @@ Ruoyi-Cloud-extend项目是基于[RuoYi-Cloud](https://gitee.com/y_project/RuoYi
 
 1. **直接写入到项目**
 
-   本项目连续开发中..
+   ![image-20200531155819783](./README/writesrc.png)
+
+   本项目连续开发中...
 
 
 
