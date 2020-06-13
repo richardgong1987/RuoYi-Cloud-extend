@@ -249,9 +249,9 @@ export default {
         return;
       }
       if (isInsertproject) {
-        batchGenCodewrite(`code/gen/batchGenCodewrite?tables=${tableNames}`, "ruoyi");
+        batchGenCodewrite(`/code/gen/batchGenCodewrite?tables=${tableNames}`, "ruoyi");
       } else {
-        downLoadZip(`code/gen/batchGenCode?tables=${tableNames}`, "ruoyi");
+        downLoadZip(`/code/gen/batchGenCode?tables=${tableNames}`, "ruoyi");
       }
     },
     /** 打开导入表弹窗 */
