@@ -4,7 +4,7 @@ services:
     container_name: mysql
     image: nacos/nacos-mysql:8.0.16
     env_file:
-      - .env/mysql.env
+      - ./env/mysql.env
     volumes:
       - ./mysql:/var/lib/mysql
     ports:
