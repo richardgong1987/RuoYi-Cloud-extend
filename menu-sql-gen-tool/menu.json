@@ -1,0 +1,184 @@
+[
+  {
+    "menuId": 2000,
+    "icon": "tree",
+    "menuName": "homex management",
+    "path": "homex",
+    "children": [
+      {
+        "menuId": 2001,
+        "icon": "guide",
+        "menuName": "condo management",
+        "path": "condo",
+        "children": [
+          {
+            "menuId": 2002,
+            "menuName": "query",
+            "perms": "query"
+          },
+          {
+            "menuId": 2003,
+            "menuName": "add",
+            "perms": "add"
+          },
+          {
+            "menuId": 2004,
+            "menuName": "add",
+            "perms": "edit"
+          },
+          {
+            "menuId": 2005,
+            "menuName": "remove",
+            "perms": "remove"
+          },
+          {
+            "menuId": 2006,
+            "menuName": "export",
+            "perms": "export"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "menuId": 2050,
+    "icon": "chart",
+    "menuName": "property management",
+    "path": "property",
+    "children": [
+      {
+        "menuId": 2007,
+        "icon": "guide",
+        "menuName": "condo management",
+        "path": "condo",
+        "children": [
+          {
+            "menuId": 2008,
+            "menuName": "query",
+            "perms": "query"
+          },
+          {
+            "menuId": 2009,
+            "menuName": "add",
+            "perms": "add"
+          },
+          {
+            "menuId": 2010,
+            "menuName": "add",
+            "perms": "edit"
+          },
+          {
+            "menuId": 2011,
+            "menuName": "remove",
+            "perms": "remove"
+          },
+          {
+            "menuId": 2012,
+            "menuName": "import",
+            "perms": "import"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "menuId": 2015,
+    "icon": "number",
+    "menuName": "front manager",
+    "path": "front",
+    "children": [
+      {
+        "menuId": 2016,
+        "icon": "guide",
+        "menuName": "movein management",
+        "path": "moving",
+        "children": [
+          {
+            "menuId": 2020,
+            "menuName": "query",
+            "perms": "query"
+          },
+          {
+            "menuId": 2017,
+            "menuName": "Confirm",
+            "perms": "Confirm"
+          },
+          {
+            "menuId": 2018,
+            "menuName": "Approve",
+            "perms": "Approve"
+          },
+          {
+            "menuId": 2019,
+            "menuName": "Reject",
+            "perms": "Reject"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "menuId": 2030,
+    "icon": "client",
+    "menuName": "Ower management",
+    "path": "Ower",
+    "children": [
+      {
+        "menuId": 2031,
+        "icon": "guide",
+        "menuName": "mycondo management",
+        "path": "mycondo",
+        "children": [
+          {
+            "menuId": 2032,
+            "menuName": "query",
+            "perms": "query"
+          },
+          {
+            "menuId": 2033,
+            "menuName": "Confirm",
+            "perms": "Confirm"
+          },
+          {
+            "menuId": 2034,
+            "menuName": "Approve",
+            "perms": "Approve"
+          },
+          {
+            "menuId": 2035,
+            "menuName": "Reject",
+            "perms": "Reject"
+          }
+        ]
+      },
+      {
+        "menuId": 2036,
+        "icon": "guide",
+        "menuName": "myform management",
+        "path": "myform",
+        "children": [
+          {
+            "menuId": 2037,
+            "menuName": "query",
+            "perms": "query"
+          },
+          {
+            "menuId": 2038,
+            "menuName": "Confirm",
+            "perms": "Confirm"
+          },
+          {
+            "menuId": 2039,
+            "menuName": "Approve",
+            "perms": "Approve"
+          },
+          {
+            "menuId": 2040,
+            "menuName": "Reject",
+            "perms": "Reject"
+          }
+        ]
+      }
+    ]
+  }
+]
