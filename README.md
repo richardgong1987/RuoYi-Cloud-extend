@@ -17,7 +17,7 @@ Ruoyi-Cloud-extend项目是基于[RuoYi-Cloud](https://gitee.com/y_project/RuoYi
 
 3. docker配置文件的生成功能空缺. 在实际开发中.我们经常需要对项目进行容器化, 集群部署等等. 这种工作比较麻烦. 如果能有一个生成docker配置的工具会更好,也比较利于学习
 
-4. ...
+4. 引入lombok,包括代码生成,直接省略get,set代码
 
    
 
