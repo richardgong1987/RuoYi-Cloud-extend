@@ -296,7 +296,7 @@ public class GenTableServiceImpl implements IGenTableService
             createCodeFiles(sw, fileName, path);
         } else if(isvue){
             String path = userdir +"/ruoyi-ui/src/";
-            createCodeFiles(sw, fileName, path);
+            createCodeFiles(sw, fileName.replaceFirst("vue/",""), path);
         }
     }
 

@@ -5,18 +5,16 @@
 GenTableServiceImpl类中
 
 ```java
-private void writeToSrc(StringWriter sw, String fileName) throws IOException {
-    boolean isjava = fileName.startsWith("main");
-    boolean isvue = fileName.startsWith("vue");
-    String userdir = System.getProperty("user.dir");
-    if(isjava){
-        String path = userdir +"/ruoyi-modules/ruoyi-system/src/";
-        createCodeFiles(sw, fileName, path);
-    } else if(isvue){
-        String path = userdir +"/ruoyi-ui/src/";
-        createCodeFiles(sw, fileName, path);
-    }
-}
+  boolean isjava = fileName.startsWith("main");
+        boolean isvue = fileName.startsWith("vue");
+        String userdir = System.getProperty("user.dir");
+        if(isjava){
+            String path = userdir +"/ruoyi-modules/ruoyi-system/src/";
+            createCodeFiles(sw, fileName, path);
+        } else if(isvue){
+            String path = userdir +"/ruoyi-ui/src/";
+            createCodeFiles(sw, fileName.replaceFirst("vue/",""), path);
+        }
 ```
 
 
