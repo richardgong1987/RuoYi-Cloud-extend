@@ -85,6 +85,7 @@ public class GenTableServiceImpl implements IGenTableService
      * @param genTable 业务信息
      * @return 数据库表集合
      */
+    @Override
     public List<GenTable> selectDbTableList(GenTable genTable)
     {
         return genTableMapper.selectDbTableList(genTable);
@@ -96,6 +97,7 @@ public class GenTableServiceImpl implements IGenTableService
      * @param tableNames 表名称组
      * @return 数据库表集合
      */
+    @Override
     public List<GenTable> selectDbTableListByNames(String[] tableNames)
     {
         return genTableMapper.selectDbTableListByNames(tableNames);
@@ -125,8 +127,8 @@ public class GenTableServiceImpl implements IGenTableService
 
     /**
      * 删除业务对象
-     *
-     * @param ids 需要删除的数据ID
+     * 
+     * @param tableIds 需要删除的数据ID
      * @return 结果
      */
     @Override
@@ -319,6 +321,7 @@ public class GenTableServiceImpl implements IGenTableService
      *
      * @param genTable 业务信息
      */
+    @Override
     public void validateEdit(GenTable genTable)
     {
         if (GenConstants.TPL_TREE.equals(genTable.getTplCategory()))
@@ -342,8 +345,8 @@ public class GenTableServiceImpl implements IGenTableService
 
     /**
      * 设置主键列信息
-     *
-     * @param genTable 业务表信息
+     * 
+     * @param table 业务表信息
      * @param columns 业务字段列表
      */
     public void setPkColumn(GenTable table, List<GenTableColumn> columns)

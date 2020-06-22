@@ -62,7 +62,7 @@ public class GenUtils
             String[] str = StringUtils.split(StringUtils.substringBetween(column.getColumnType(), "(", ")"), ",");
             if (str != null && str.length == 2 && Integer.parseInt(str[1]) > 0)
             {
-                column.setJavaType(GenConstants.TYPE_DOUBLE);
+                column.setJavaType(GenConstants.TYPE_BIGDECIMAL);
             }
             // 如果是整形
             else if (str != null && str.length == 1 && Integer.parseInt(str[0]) <= 10)
@@ -195,7 +195,7 @@ public class GenUtils
     /**
      * 关键字替换
      * 
-     * @param name 需要被替换的名字
+     * @param text 需要被替换的名字
      * @return 替换后的名字
      */
     public static String replaceText(String text)
