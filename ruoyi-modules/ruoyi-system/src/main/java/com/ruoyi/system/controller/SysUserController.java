@@ -3,6 +3,7 @@ package com.ruoyi.system.controller;
 import java.io.IOException;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -26,6 +27,7 @@ import com.ruoyi.common.core.web.page.TableDataInfo;
 import com.ruoyi.common.log.annotation.Log;
 import com.ruoyi.common.log.enums.BusinessType;
 import com.ruoyi.common.security.utils.SecurityUtils;
+import com.ruoyi.system.api.domain.SysRole;
 import com.ruoyi.system.api.domain.SysUser;
 import com.ruoyi.system.api.model.UserInfo;
 import com.ruoyi.system.service.ISysPermissionService;
@@ -104,7 +106,7 @@ public class SysUserController extends BaseController
         SysUser sysUser = userService.selectUserByUserName(username);
         if (StringUtils.isNull(sysUser))
         {
-            return R.failed("用户名或密码错误");
+            return R.fail("用户名或密码错误");
         }
         // 角色集合
         Set<String> roles = permissionService.getRolePermission(sysUser.getUserId());
@@ -145,7 +147,8 @@ public class SysUserController extends BaseController
     public AjaxResult getInfo(@PathVariable(value = "userId", required = false) Long userId)
     {
         AjaxResult ajax = AjaxResult.success();
-        ajax.put("roles", roleService.selectRoleAll());
+        List<SysRole> roles = roleService.selectRoleAll();
+        ajax.put("roles", SysUser.isAdmin(userId) ? roles : roles.stream().filter(r -> !r.isAdmin()).collect(Collectors.toList()));
         ajax.put("posts", postService.selectPostAll());
         if (StringUtils.isNotNull(userId))
         {
